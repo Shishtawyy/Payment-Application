@@ -1,0 +1,8 @@
+Detecting C compiler ABI info failed to compile with the following output:
+Change Dir: D:/Engineering/Coding/Clion/Payment Application/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2021.3.4/bin/ninja/win/ninja.exe cmTC_ad10f && ninja: error: unknown target 'cmTC_ad10f'
+
+
+
+
