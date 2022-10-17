@@ -34,6 +34,7 @@ uint8_t Get_Balance(int i);
 //transactions database functions to deal with text file (messing modules)
 
 //ST_transaction_t Get_Transaction(int i)
+//void Set_Transaction(ST_transaction transaction);
 
 
 
