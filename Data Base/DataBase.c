@@ -102,3 +102,45 @@ void Get_Account(char *PAN,ST_accountsDB_t *account)
 
 }
 
+
+void Change_Balance(char *PAN, float trans_amount)
+{
+
+    FILE *fptr_account;
+    fptr_account = fopen("Account.txt", "r");
+
+    FILE *fptr_account2;
+    fptr_account2 = fopen("Account2.txt", "w");
+    float balance;
+    uint8_t readed [20] = {0};
+    int syntax = 0;
+    while (!feof(fptr_account)) {
+        fscanf(fptr_account, "%s", readed);
+        if (strcmp(PAN,  readed) == 0)
+        {
+            fscanf(fptr_account,"%f",&balance);
+            balance -= trans_amount;
+
+            fprintf(fptr_account2, "%s", readed);
+            syntax++;
+            fprintf(fptr_account2," %f\n",balance);
+            syntax++;
+            continue;
+        }
+        if(syntax%2 == 0)
+        {
+            fprintf(fptr_account2, "%s", readed);
+        } else
+        {
+            fprintf(fptr_account2, " %s\n", readed);
+
+        }
+        syntax++;
+
+    }
+
+    fclose(fptr_account);
+    fclose(fptr_account2);
+    remove("Account.txt");
+    rename("Account2.txt","Account.txt");
+}

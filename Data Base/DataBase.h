@@ -17,6 +17,7 @@ void Get_Transaction(char * PAN,ST_transaction_t *transaction);
 
 void Get_Account(char *PAN,ST_accountsDB_t *account);
 
+void Change_Balance(char *PAN,float trans_amount);
 
 
 #endif //PAYMENT_APPLICATION_DATABASE_H

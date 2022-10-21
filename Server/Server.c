@@ -50,7 +50,7 @@ EN_transState_t receiveTransactionData(ST_transaction_t *transData)
         return DECLINED_INSUFFECIENT_FUND;
     } else if (transData ->transState == APPROVED)
     {
-        accountsDb[theaccountelement].balance -= transData->terminalData.transAmount; // this line needs to be changed to a database implementation
+        Change_Balance(account.primaryAccountNumber,transactions->terminalData.transAmount);
         return APPROVED;
     }
 
