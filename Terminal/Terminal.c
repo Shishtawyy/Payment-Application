@@ -124,10 +124,10 @@ EN_terminalError_t setMAxAmount(ST_terminalData_t * termdata)
 EN_terminalError_t isValidCardPAN(ST_cardData_t * cardData)
 {   int sumOdd=0, sumEven=0,allSum;
     for(int i = 1;i<16;i=i+2)
-    sumOdd = sumOdd + cardData->primaryAccount[i];
+    sumOdd = sumOdd + cardData->primaryAccountNumber[i];
     for(int i = 0 ; i<16;i= i+2)
     {
-        int sum =  cardData->primaryAccount[i]* 2;
+        int sum =  cardData->primaryAccountNumber[i]* 2;
 
     if (sum >= 10)
         {sum = sum - 9;

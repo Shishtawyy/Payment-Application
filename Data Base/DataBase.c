@@ -25,9 +25,9 @@ void Save_Transaction(ST_transaction_t *transaction)
     }
 
     fptr_card = fopen("Card.txt", "a");
-    fprintf(fptr_card,"%s %s %s \n",transaction->cardHolderData.primaryAccount,transaction->cardHolderData.cardHolderName,transaction->cardHolderData.cardExpirationDate);
+    fprintf(fptr_card,"%s %s %s \n",transaction->cardHolderData.primaryAccountNumber,transaction->cardHolderData.cardHolderName,transaction->cardHolderData.cardExpirationDate);
     fptr_terminal = fopen("Terminal.txt","a");
-    fprintf (fptr_terminal,"%s %s %f %f %d \n",transaction->cardHolderData.primaryAccount,transaction->terminalData.transactionDate,transaction->terminalData.maxTransAmount,transaction->terminalData.transAmount,transaction->transState);
+    fprintf (fptr_terminal,"%s %s %f %f %d \n",transaction->cardHolderData.primaryAccountNumber,transaction->terminalData.transactionDate,transaction->terminalData.maxTransAmount,transaction->terminalData.transAmount,transaction->transState);
     fclose(fptr_card);
     fclose(fptr_terminal);
 
@@ -42,8 +42,8 @@ void Get_Transaction(char * PAN,ST_transaction_t *transaction)
 
     fptr_card = fopen("Card.txt", "r");
     while (!feof(fptr_card)) {
-        fscanf(fptr_card, "%s", transaction->cardHolderData.primaryAccount );
-        if (strcmp(PAN, (char*)transaction->cardHolderData.primaryAccount ) == 0) {
+        fscanf(fptr_card, "%s", transaction->cardHolderData.primaryAccountNumber );
+        if (strcmp(PAN, (char*)transaction->cardHolderData.primaryAccountNumber ) == 0) {
 
             flag =1;
 
@@ -56,8 +56,8 @@ void Get_Transaction(char * PAN,ST_transaction_t *transaction)
 
     fptr_terminal = fopen("Terminal.txt","r");
     while (!feof(fptr_terminal)) {
-        fscanf(fptr_terminal, "%s", transaction->cardHolderData.primaryAccount);
-        if (strcmp(PAN, (char *) transaction->cardHolderData.primaryAccount) == 0) {
+        fscanf(fptr_terminal, "%s", transaction->cardHolderData.primaryAccountNumber);
+        if (strcmp(PAN, (char *) transaction->cardHolderData.primaryAccountNumber) == 0) {
 
 
             fscanf(fptr_card, "%s %f %f %d",transaction->terminalData.transactionDate,&(transaction->terminalData.transAmount),&(transaction->terminalData.maxTransAmount),&(transaction->transState));
