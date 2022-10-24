@@ -13,7 +13,7 @@ void Save_Transaction(ST_transaction_t *transaction)
     FILE *fptr_terminal;
     int spaces = 0;
     int i = 0;
-    while (spaces !=3  )
+    while (spaces !=2  )
     {
         if (transaction->cardHolderData.cardHolderName[i] == ' ')
         {
@@ -87,6 +87,7 @@ void Get_Account(char *PAN,ST_accountsDB_t *account)
         {
             flag =1;
             fscanf(fptr_account,"%f",&(account->balance));
+            break;
         }
 
     }

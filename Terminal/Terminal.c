@@ -3,13 +3,22 @@
 //
 
 #include "Terminal.h"
-EN_terminalError_t getTransactionDate(ST_terminalData_t * termdata)
+void getTransactionDate(ST_terminalData_t * termdata)
 {
     char date[10];
-    time_t t;
-    t = time(NULL);
+    time_t t = time(NULL);
     struct tm tm = *localtime(&t);
-    int m;
+    //printf("Date and time: %d,%d,%d\n",tm.tm_mday,tm.tm_mon + 1,tm.tm_year + 1900);
+    date[0]=((tm.tm_mday)/10)+48;
+    date[1]=((tm.tm_mday)%10)+48;
+    date[2]=47;
+    date[3]=(((tm.tm_mon + 1))/10)+48;
+    date[4]=(((tm.tm_mon + 1))%10)+48;
+    date[5]=47;
+    date[6]=((tm.tm_year + 1900)/1000)+48;
+    date[7]=(((tm.tm_year + 1900)/100)%10)+48;
+    date[8]=(((tm.tm_year + 1900)/10)%10)+48;
+    date[9]=((tm.tm_year + 1900)%10)+48;
      strcpy(termdata->transactionDate,date);
 }
 
@@ -80,6 +89,7 @@ EN_terminalError_t getTransactionAmount(ST_terminalData_t * termdata)
      
 printf("Enter the TRansaction amount :     ");
 scanf("%f", &termdata->transAmount);
+    fflush(stdin);
 if(termdata->transAmount  ==  0  ||  termdata->transactionDate < 0 )
 return INVALID_AMOUNT ;
 
@@ -108,7 +118,7 @@ EN_terminalError_t isBelowMaxAmount(ST_terminalData_t *termdata)
 
 
 
-EN_terminalError_t setMAxAmount(ST_terminalData_t * termdata)
+EN_terminalError_t setMaxAmount(ST_terminalData_t * termdata)
 {    termdata->maxTransAmount = MAX_AMOUNT ;
      if(termdata->maxTransAmount == 0 || termdata->maxTransAmount < 0 )
      return INVALID_MAX_AMOUNT ;

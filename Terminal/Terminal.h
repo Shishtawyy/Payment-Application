@@ -5,7 +5,7 @@
 #ifndef PAYMENT_APPLICATION_TERMINAL_H
 #define PAYMENT_APPLICATION_TERMINAL_H
 
-#endif //PAYMENT_APPLICATION_TERMINAL_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -31,7 +31,7 @@ typedef struct ST_teminalData_t
 
 
 
-EN_terminalError_t getTransactionDate(ST_terminalData_t * termData);
+void getTransactionDate(ST_terminalData_t * termData);
 
 
 EN_terminalError_t isCardExpired(ST_cardData_t cardData , ST_terminalData_t termData);
@@ -46,5 +46,6 @@ EN_terminalError_t getTransactionAmount(ST_terminalData_t * termdata);
 EN_terminalError_t isBelowMaxAmount(ST_terminalData_t *termdata);
 
 
-EN_terminalError_t setMAxAmount(ST_terminalData_t * termdata);
+EN_terminalError_t setMaxAmount(ST_terminalData_t * termdata);
 
+#endif //PAYMENT_APPLICATION_TERMINAL_H
