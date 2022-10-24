@@ -5,12 +5,11 @@
 #include "Terminal.h"
 EN_terminalError_t getTransactionDate(ST_terminalData_t * termdata)
 {
-     time_t t = time(NULL);
-    struct tm tm;
-     char date[11];
-      time(&t);
-      tm = *localtime(&t);
-     strftime(date, sizeof(date), "%d/%m/%Y",&tm);
+    char date[10];
+    time_t t;
+    t = time(NULL);
+    struct tm tm = *localtime(&t);
+    int m;
      strcpy(termdata->transactionDate,date);
 }
 

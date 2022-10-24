@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/Payment_Application.dir/main.c.o CMakeFiles/Payment_Application.dir/App/App.c.o CMakeFiles/Payment_Application.dir/Card/Card.c.o CMakeFiles/Payment_Application.dir/Server/Server.c.o CMakeFiles/Payment_Application.dir/Terminal/Terminal.c.o CMakeFiles/Payment_Application.dir/Data_Base/DataBase.c.o -o Payment_Application 

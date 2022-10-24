@@ -8,7 +8,7 @@
 
 EN_cardError_t getCardHolderName(ST_cardData_t *cardData){
 	printf("Enter The Card Holder Name: ");
-	char NAME[25] , ch ,i;
+	char NAME[25];
 	gets(NAME);
 	int length = strlen(NAME);
 	if (NAME != NULL && length <=24 && length >=20 ){
@@ -26,7 +26,7 @@ EN_cardError_t getCardHolderName(ST_cardData_t *cardData){
 
 EN_cardError_t getCardExpiryData(ST_cardData_t *cardData){
 	printf("Please enter card expiry date in the format \"MM/YY\": ");
-	char DATE[20] ,i ;	
+	char DATE[20]  ;
 	gets(DATE);
 	int length =strlen(DATE);
 	int month ;
@@ -37,13 +37,11 @@ EN_cardError_t getCardExpiryData(ST_cardData_t *cardData){
 	}		
 	if (DATE == NULL || length != 5 || month<1 || month>12 || DATE[2] != '/')
 		return WRONG_EXP_DATE;
-	
-	for (int i = 0; i < length; i++){
-		if (i == 2)
-			continue;
-		else if (DATE[i] < '0' || DATE[i]>'9')
-			return WRONG_EXP_DATE;
-	}
+
+    for (int i = 3; i < length; i++){
+        if (DATE[i] < '0' || DATE[i]>'9')
+            return WRONG_EXP_DATE;
+    }
     strcpy(cardData->cardHolderName,DATE);
 	return OK_CARD;	
 }
@@ -62,12 +60,12 @@ int CheckLuhn(char CardNo[] ,int size){
 }
 
 EN_cardError_t getCardPAN(ST_cardData_t*cardData){
-	char NUM[30];
+	char NUM[20];
 	printf("Please enter the card primary account number: ");
 	gets(NUM);	
 	int length = strlen(NUM);	
 	if(CheckLuhn(NUM,length)){
-		if(NUM == NULL || length<16 || length>19 ){
+		if(length<16 || length>19 ){
 			return WRONG_PAN;
 		}
 		for (int i = 0; i < length; i++){		
