@@ -1,5 +1,5 @@
 //
-// Created by kareem on 8/15/22.
+// Created by kareem on 10/16/22.
 //
 
 #ifndef PAYMENT_APPLICATION_SERVER_H
@@ -40,10 +40,6 @@ typedef struct ST_accountsDB_t
     uint8_t primaryAccountNumber [20];
 }ST_accountsDB_t;
 
-
-extern ST_accountsDB_t accountsDb [255];
-extern ST_transaction_t transactions [255];
-extern int theaccountelement;
 
 
 

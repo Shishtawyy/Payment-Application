@@ -78,3 +78,8 @@
 9	103	6884268018602397	CMakeFiles/Payment_Application.dir/Server/Server.c.obj	ff1e3541679e1968
 4	106	6884268018622370	CMakeFiles/Payment_Application.dir/App/App.c.obj	f82e31ab1e172ab3
 106	409	6884268021599888	Payment_Application.exe	aea562eed25cca40
+6	103	6884270752279738	CMakeFiles/Payment_Application.dir/App/App.c.obj	f82e31ab1e172ab3
+2	106	6884270752299664	CMakeFiles/Payment_Application.dir/main.c.obj	270610abf304e3dc
+10	124	6884270752504037	CMakeFiles/Payment_Application.dir/Data_Base/DataBase.c.obj	8da13dc9342c4a4b
+13	126	6884270752523979	CMakeFiles/Payment_Application.dir/Server/Server.c.obj	ff1e3541679e1968
+126	219	6884270753398911	Payment_Application.exe	aea562eed25cca40
