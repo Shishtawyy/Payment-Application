@@ -82,7 +82,17 @@ void appStart(void)
         transaction.terminalData = terminal;
         receiveTransactionData(&transaction);
 
-
+        int choice=0;
+        printf("Please enter the number 1 if you want to do another transaction , or anything else to exit the program:");
+        scanf("%d",&choice);
+        fflush(stdin);
+        if (choice==1)
+        {
+            continue;
+        } else
+        {
+            break;
+        }
     }
 
 

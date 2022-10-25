@@ -77,71 +77,124 @@ void Get_Transaction(char * PAN,ST_transaction_t *transaction)
 
 void Get_Account(char *PAN,ST_accountsDB_t *account)
 {
-    int flag;
+    int flag2;
+    FILE *fptr_flag;
+    fptr_flag = fopen("flag.txt", "r");
+    static int flag=0;
+    fscanf(fptr_flag,"%d",&flag);
+    fclose(fptr_flag);
     FILE *fptr_account;
-    fptr_account = fopen("Account.txt", "r");
+    if (flag==0)
+    {
+        fptr_account = fopen("Account.txt", "r");
+    } else
+    {
+        fptr_account = fopen("Account2.txt", "r");
+    }
+
+
     while (!feof(fptr_account))
     {
         fscanf(fptr_account,"%s",account->primaryAccountNumber);
         if (strcmp(PAN, (char *) account->primaryAccountNumber) == 0)
         {
-            flag =1;
+            flag2 =1;
             fscanf(fptr_account,"%f",&(account->balance));
             break;
         }
 
     }
-    if (flag == 0)
+    if (flag2 == 0)
     {
         //if we didn't fin the account -1 means not found
         account->balance = -1;
     }
-
-
-
-
-
 }
 
 
-void Change_Balance(char *PAN, float trans_amount)
-{
+void Change_Balance(char *PAN, float trans_amount) {
+    FILE *fptr_flag;
+    fptr_flag = fopen("flag.txt", "r");
+    static int flag=0;
+    fscanf(fptr_flag,"%d",&flag);
+    fclose(fptr_flag);
+    if (flag == 0) {
+        fptr_flag=fopen("flag.txt", "w");
+        fprintf(fptr_flag,"%d",1);
+        fclose(fptr_flag);
 
-    FILE *fptr_account;
-    fptr_account = fopen("Account.txt", "r");
+        FILE *fptr_account;
+        fptr_account = fopen("Account.txt", "r");
 
-    FILE *fptr_account2;
-    fptr_account2 = fopen("Account2.txt", "w");
-    float balance;
-    uint8_t readed [20] = {0};
-    int syntax = 0;
-    while (!feof(fptr_account)) {
-        fscanf(fptr_account, "%s", readed);
-        if (strcmp(PAN,  readed) == 0)
-        {
-            fscanf(fptr_account,"%f",&balance);
-            balance -= trans_amount;
+        FILE *fptr_account2;
+        fptr_account2 = fopen("Account2.txt", "w");
+        float balance;
+        uint8_t readed[20] = {0};
+        int syntax = 0;
+        while (!feof(fptr_account)) {
+            fscanf(fptr_account, "%s", readed);
+            if (strcmp(PAN, readed) == 0) {
+                fscanf(fptr_account, "%f", &balance);
+                balance -= trans_amount;
 
-            fprintf(fptr_account2, "%s", readed);
+                fprintf(fptr_account2, "%s", readed);
+                syntax++;
+                fprintf(fptr_account2, " %f\n", balance);
+                syntax++;
+                continue;
+            }
+            if (syntax % 2 == 0) {
+                fprintf(fptr_account2, "%s", readed);
+            } else {
+                fprintf(fptr_account2, " %s\n", readed);
+
+            }
             syntax++;
-            fprintf(fptr_account2," %f\n",balance);
-            syntax++;
-            continue;
-        }
-        if(syntax%2 == 0)
-        {
-            fprintf(fptr_account2, "%s", readed);
-        } else
-        {
-            fprintf(fptr_account2, " %s\n", readed);
 
         }
-        syntax++;
 
+        fclose(fptr_account);
+        fclose(fptr_account2);
+//        remove("Account.txt");
+//        rename("Account2.txt", "Account.txt");
     }
+    else
+    {
+        fptr_flag=fopen("flag.txt", "w");
+        fprintf(fptr_flag,"%d",0);
+        FILE *fptr_account;
+        fptr_account = fopen("Account.txt", "w");
 
-    fclose(fptr_account);
-    fclose(fptr_account2);
-    remove("Account.txt");
-    rename("Account2.txt","Account.txt");
+        FILE *fptr_account2;
+        fptr_account2 = fopen("Account2.txt", "r");
+        float balance;
+        uint8_t readed[20] = {0};
+        int syntax = 0;
+        while (!feof(fptr_account2)) {
+            fscanf(fptr_account2, "%s", readed);
+            if (strcmp(PAN, readed) == 0) {
+                fscanf(fptr_account2, "%f", &balance);
+                balance -= trans_amount;
+
+                fprintf(fptr_account, "%s", readed);
+                syntax++;
+                fprintf(fptr_account, " %f\n", balance);
+                syntax++;
+                continue;
+            }
+            if (syntax % 2 == 0) {
+                fprintf(fptr_account, "%s", readed);
+            } else {
+                fprintf(fptr_account, " %s\n", readed);
+
+            }
+            syntax++;
+
+        }
+
+        fclose(fptr_account);
+        fclose(fptr_account2);
+//        remove("Account.txt");
+//        rename("Account2.txt", "Account.txt");
+    }
 }

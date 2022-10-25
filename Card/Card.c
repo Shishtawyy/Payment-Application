@@ -65,7 +65,8 @@ EN_cardError_t getCardPAN(ST_cardData_t*cardData){
 	char NUM[20];
 	printf("Please enter the card primary account number: ");
 	scanf("%s",NUM);
-	int length = strlen(NUM);	
+	int length = strlen(NUM);
+    fflush(stdin);
 	if(CheckLuhn(NUM,length)){
 		if(length<16 || length>19 ){
 			return WRONG_PAN;

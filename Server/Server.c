@@ -22,11 +22,11 @@ EN_transState_t receiveTransactionData(ST_transaction_t *transData)
     if (isValidAccount(&transData->cardHolderData,&account) == TRANSACTION_NOT_FOUND)
     {
         transData->transState = DECLINED_STOLEN_CARD;
-
+        printf("Card Stolen Or Wrong PAN !\n");
 
     }else if (isAmountAvailable(&transData->terminalData,account)== LOW_BALANCE)
     {
-
+        printf("Insufficient money,Transaction not done.\n");
         transData->transState = DECLINED_INSUFFECIENT_FUND;
     } else
     {
@@ -50,7 +50,7 @@ EN_transState_t receiveTransactionData(ST_transaction_t *transData)
         return DECLINED_INSUFFECIENT_FUND;
     } else if (transData ->transState == APPROVED)
     {
-        Change_Balance(account.primaryAccountNumber,transactions->terminalData.transAmount);
+        Change_Balance(account.primaryAccountNumber,transData->terminalData.transAmount);
         return APPROVED;
     }
 
@@ -133,11 +133,6 @@ EN_serverError_t getTransaction(uint32_t transactionSequenceNumber, ST_transacti
     }
 
 }
-
-
-
-
-
 
 
 
